@@ -1,0 +1,104 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.InputSystem;
+
+
+public class Weapon : MonoBehaviour
+{
+    [SerializeField] Camera playerCam;
+    [SerializeField] float raycastRange = 100f;
+    [SerializeField] float damage = 10f;
+
+    private InputAction shootAction;
+    public InputActionAsset inputActionAsset;
+    public int ammoCount = 5;
+    private int increaseAmmo = 5;
+    public int totalAmmo = 10;
+
+
+    public void OnEnable()
+    {
+        shootAction = inputActionAsset.FindActionMap("Shoot").FindAction("Fire");
+        shootAction.performed += ctx => Shoot();
+        shootAction.Enable();
+    }
+
+    private void OnDisable()
+    {
+        shootAction.Disable();
+    }
+
+    private void Shoot()
+    {
+        Raycast();
+        decreaseAmmo();
+    }
+
+    public void Reload(InputAction.CallbackContext context)
+    {
+        if (totalAmmo == 10 && ammoCount == 0)
+        {
+            totalAmmo -= 5;
+            ammoCount = 5;
+            OnEnable();
+            Debug.Log("Added ammo to ammoCount");
+        }
+
+        if (totalAmmo == 5 && ammoCount == 0)
+        {
+            totalAmmo -= 5;
+            ammoCount = 5;
+            OnEnable();
+            Debug.Log("Added Ammo to ammoCount 2");
+        }
+    }
+
+
+
+    private void Raycast()
+    {
+        RaycastHit hit;
+
+        if (Physics.Raycast(playerCam.transform.position, playerCam.transform.forward, out hit, raycastRange))
+        {
+            Debug.Log(hit.collider.gameObject);
+            //enemyHealth enemyTarget = hit.transform.GetComponent<enemyHealth>();
+            //enemyTarget.TakeDamage(damage);
+
+        }
+
+
+    }
+
+
+    private void decreaseAmmo()
+    {
+        if (ammoCount > 0)
+        {
+            ammoCount -= 1;
+        }
+
+        else
+        {
+            OnDisable();
+            Debug.Log("Can't shoot");
+
+        }
+
+
+    }
+
+    public void addAmmo()
+    {
+        totalAmmo += increaseAmmo;
+        if (totalAmmo > 0 && totalAmmo < 5)
+        {
+            OnEnable();
+
+        }
+
+
+    }
+
+}
