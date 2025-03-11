@@ -9,6 +9,7 @@ public class Weapon : MonoBehaviour
     [SerializeField] Camera playerCam;
     [SerializeField] float raycastRange = 100f;
     [SerializeField] float damage = 10f;
+    
 
     private InputAction shootAction;
     public InputActionAsset inputActionAsset;
@@ -63,7 +64,7 @@ public class Weapon : MonoBehaviour
         if (Physics.Raycast(playerCam.transform.position, playerCam.transform.forward, out hit, raycastRange))
         {
             Debug.Log(hit.collider.gameObject);
-            //enemyHealth enemyTarget = hit.transform.GetComponent<enemyHealth>();
+            //enemyHealth enemyTarget = hit.collider.GetComponent<enemyHealth>();
             //enemyTarget.TakeDamage(damage);
 
         }
