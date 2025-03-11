@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 
 public class Weapon : MonoBehaviour
@@ -15,7 +16,12 @@ public class Weapon : MonoBehaviour
     public int ammoCount = 5;
     private int increaseAmmo = 5;
     public int totalAmmo = 10;
+    public Text ammo_text;
 
+    void Update()
+    {
+        UpdateAmmoText();
+    }
 
     public void OnEnable()
     {
@@ -33,6 +39,7 @@ public class Weapon : MonoBehaviour
     {
         Raycast();
         decreaseAmmo();
+        UpdateAmmoText();
     }
 
     public void Reload(InputAction.CallbackContext context)
@@ -52,6 +59,7 @@ public class Weapon : MonoBehaviour
             OnEnable();
             Debug.Log("Added Ammo to ammoCount 2");
         }
+        UpdateAmmoText();
     }
 
 
@@ -85,7 +93,7 @@ public class Weapon : MonoBehaviour
             Debug.Log("Can't shoot");
 
         }
-
+        UpdateAmmoText();
 
     }
 
@@ -97,8 +105,11 @@ public class Weapon : MonoBehaviour
             OnEnable();
 
         }
-
+        UpdateAmmoText();
 
     }
-
+    private void UpdateAmmoText()
+    {
+        ammo_text.text = $"{ammoCount}/{totalAmmo}";
+    }
 }

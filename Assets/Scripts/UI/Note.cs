@@ -6,6 +6,7 @@ public class Note : MonoBehaviour
 {
     public GameObject LettersUI;
     bool toggle;
+    public Renderer NoteMesh;
 
     public void openCloseLetter()
     {
@@ -13,10 +14,12 @@ public class Note : MonoBehaviour
         if (toggle == false)
         {
             LettersUI.SetActive(false);
+            NoteMesh.enabled = true;
         }
         if(toggle == true)
         {
             LettersUI.SetActive(true);
+            NoteMesh.enabled = false;
         }
     }
 }
