@@ -17,11 +17,11 @@ public class Weapon : MonoBehaviour
     public int ammoCount = 5;
     private int increaseAmmo = 5;
     public int totalAmmo = 10;
-    public Text ammo_text;
+    //public Text ammo_text;
 
     void Update()
     {
-        UpdateAmmoText();
+        //UpdateAmmoText();
     }
 
     public void OnEnable()
@@ -40,7 +40,7 @@ public class Weapon : MonoBehaviour
     {
         Raycast();
         decreaseAmmo();
-        UpdateAmmoText();
+        //UpdateAmmoText();
     }
 
     public void Reload(InputAction.CallbackContext context)
@@ -60,7 +60,7 @@ public class Weapon : MonoBehaviour
             OnEnable();
             Debug.Log("Added Ammo to ammoCount 2");
         }
-        UpdateAmmoText();
+        //UpdateAmmoText();
     }
 
 
@@ -94,7 +94,7 @@ public class Weapon : MonoBehaviour
             Debug.Log("Can't shoot");
 
         }
-        UpdateAmmoText();
+        //UpdateAmmoText();
 
     }
 
@@ -106,11 +106,11 @@ public class Weapon : MonoBehaviour
             OnEnable();
 
         }
-        UpdateAmmoText();
+        //UpdateAmmoText();
 
     }
-    private void UpdateAmmoText()
+    /*private void UpdateAmmoText()
     {
         ammo_text.text = $"{ammoCount}/{totalAmmo}";
-    }
+    }*/
 }
