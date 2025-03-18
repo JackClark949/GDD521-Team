@@ -7,19 +7,17 @@ public class blockRotate : MonoBehaviour
     PlayerInput playerInput;
     InputAction Rotate;
     openDrawer openDrawer;
-    //public GameObject openDrawerr;
+    public GameObject openDrawerr;
     private bool blockRotation = false;
-    blockRotate2 blockrotate2;
-    MeshRenderer mesh;
 
 
 
-    //public GameObject rotatePiece2;
+    public GameObject rotatePiece2;
 
     public Quaternion[] rotations;
-   
+    public Quaternion[] rotations2;
     private int currentRotation = 0;
-    
+    private int currentRotation2 = 0;
 
 
 
@@ -30,9 +28,7 @@ public class blockRotate : MonoBehaviour
     {
         playerInput = GetComponent<PlayerInput>();
         Rotate = playerInput.actions.FindAction("Rotate");
-        blockrotate2 = GetComponent<blockRotate2>();
-        //openDrawer = openDrawerr.GetComponent<openDrawer>();
-        mesh = GetComponentInChildren<MeshRenderer>();
+        openDrawer = openDrawerr.GetComponent<openDrawer>();
 
 
         rotations = new Quaternion[]
@@ -44,7 +40,13 @@ public class blockRotate : MonoBehaviour
 
         };
 
-       
+        rotations2 = new Quaternion[]
+        {
+            Quaternion.Euler(60, 0, 0),
+            Quaternion.Euler(30, 0, 0),
+            Quaternion.Euler(85, 0, 0)
+
+        };
 
     }
 
@@ -76,28 +78,22 @@ public class blockRotate : MonoBehaviour
             gameObject.transform.rotation = rotations[currentRotation];
             Debug.Log("Rotated");
 
+            currentRotation2 = (currentRotation2 + 1) % rotations.Length;
+            rotatePiece2.transform.rotation = rotations2[currentRotation2];
+            Debug.Log("Rotated 2");
 
+            float xRotation = gameObject.transform.rotation.eulerAngles.x;
+            float xRotation2 = rotatePiece2.transform.rotation.eulerAngles.x;
 
-            //float xRotation = gameObject.transform.rotation.eulerAngles.x;
-            float xRotation = mesh.transform.rotation.eulerAngles.x;
-            float xRotation2 = blockrotate2.mesh.transform.rotation.eulerAngles.x;
-            
-
-            if (xRotation == 75 && xRotation2 == 80)
+            if (Mathf.Abs(xRotation - 75f) < 0.1f && Mathf.Abs(xRotation2 - 30f) < 0.1f)
             {
-                Debug.Log("Reached both rotations");
+                openDrawer.playAnim();
             }
-            
 
 
 
 
         }
-
-        
-        
-
-        
 
 
 
