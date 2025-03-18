@@ -41,7 +41,11 @@ public class playerMovement : MonoBehaviour
         cameraRight.Normalize();
 
         Vector3 movement = cameraForward * direction.y + cameraRight * direction.x;
+       
+        //controller.Move(movement * playerSpeed * Time.deltaTime);
+        controller.SimpleMove(movement);
         controller.Move(movement * playerSpeed * Time.deltaTime);
+        
 
 
         //Sprinting
@@ -49,7 +53,7 @@ public class playerMovement : MonoBehaviour
         Movement_.currentSpeed = Mathf.MoveTowards(Movement_.currentSpeed, targetSpeed, Movement_.acceleration * Time.deltaTime);
         controller.Move(direction * Movement_.currentSpeed * Time.deltaTime);
 
-
+        //
     }
 
     public void Sprint(InputAction.CallbackContext context)

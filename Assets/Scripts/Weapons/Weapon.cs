@@ -17,7 +17,7 @@ public class Weapon : MonoBehaviour
     public int ammoCount = 5;
     private int increaseAmmo = 5;
     public int totalAmmo = 10;
-    public Text ammo_text;
+    //public Text ammo_text;
     //public float ClipLength = 1f;
     //public GameObject AudioClip;
 
@@ -80,6 +80,17 @@ public class Weapon : MonoBehaviour
             Debug.Log(hit.collider.gameObject);
             //enemyHealth enemyTarget = hit.collider.GetComponent<enemyHealth>();
             //enemyTarget.TakeDamage(damage);
+            //enemyHealth enemytarget
+            enemyHealth enemyTarget = hit.collider.GetComponent<enemyHealth>();
+            if (enemyTarget != null)
+            {
+                enemyTarget.TakeDamage(damage);
+            }
+
+
+
+
+
 
         }
 
@@ -117,6 +128,6 @@ public class Weapon : MonoBehaviour
     }
     private void UpdateAmmoText()
     {
-        ammo_text.text = $"{ammoCount}/{totalAmmo}";
+        //ammo_text.text = $"{ammoCount}/{totalAmmo}";
     }
 }
